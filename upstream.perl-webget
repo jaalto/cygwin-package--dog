@@ -1,0 +1,2 @@
+tag1: dog
+  http://packages.debian.org/unstable/dog pregexp:orig.tar.gz file:dog_1.7.orig.tar.gz new: x:

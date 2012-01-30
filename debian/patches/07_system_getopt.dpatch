@@ -1,0 +1,31 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 07_system_getopt.dpatch by Eugeniy Meshcheryakov <eugen@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad dog-1.7~/Makefile dog-1.7/Makefile
+--- dog-1.7~/Makefile	2008-01-18 16:53:21.000000000 +0100
++++ dog-1.7/Makefile	2008-01-18 16:53:28.000000000 +0100
+@@ -18,7 +18,7 @@
+ #  dogboy@photodex.com!
+ 
+ INSTALL = /usr/bin/install -c
+-OBJS = dog.o getopt.o getopt1.o
++OBJS = dog.o
+ CFLAGS = -O3 -Wall
+ 
+ prefix = /usr/local
+diff -urNad dog-1.7~/dog.c dog-1.7/dog.c
+--- dog-1.7~/dog.c	2008-01-18 16:53:28.000000000 +0100
++++ dog-1.7/dog.c	2008-01-18 16:53:53.000000000 +0100
+@@ -34,7 +34,7 @@
+ #include <stdio.h>
+ #include <errno.h>
+ #include <string.h>
+-#include "getopt.h"
++#include <getopt.h>
+ #include <limits.h>
+ #include <time.h>
+ #include <netdb.h>

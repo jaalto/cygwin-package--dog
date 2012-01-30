@@ -1,0 +1,28 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 08_manpage_-w.dpatch by Eugeniy Meshcheryakov <eugen@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad dog-1.7~/dog.1 dog-1.7/dog.1
+--- dog-1.7~/dog.1	2008-01-18 17:01:03.000000000 +0100
++++ dog-1.7/dog.1	2008-01-18 17:02:24.000000000 +0100
+@@ -6,7 +6,7 @@
+ dog \- better than cat
+ .SH SYNOPSIS
+ .B dog
+-[\-AbBeEnstTuv] [\-w cols] [\-l lines] 
++[\-AbBeEnstTuv] [\-w[cols]] [\-l lines] 
+ [\-\-show\-all] [\-\-number\-nonblank] [\-\-no\-blanks] [\-\-bind=port]
+ [\-\-dos] [\-\-show\-ends] [\-\-hang\-up] [\-\-images] [\-\-krad]
+ [\-\-links] [\-\-lower] [\-\-mac] [\-\-number] [\-\-no\-header]
+@@ -62,7 +62,7 @@
+ .I \-u
+ Ignored; for Unix compatibility.
+ .TP
+-.I \-w n
++.I \-w[n]
+ Print first n characters of each line (default=80)
+ .TP
+ .I \-v, \-\-show\-nonprinting

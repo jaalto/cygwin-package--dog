@@ -1,0 +1,89 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 09_long_filename_crash.dpatch by  <Eugeniy Meshcheryakov <eugen@debian.org>>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad dog-1.7~/dog.c dog-1.7/dog.c
+--- dog-1.7~/dog.c	2008-01-20 18:53:06.000000000 +0100
++++ dog-1.7/dog.c	2008-01-20 18:53:42.000000000 +0100
+@@ -138,7 +138,7 @@
+ static int skip_tags = 0;							// skip HTML tags in processing
+ static int hex = 0;									// output as a hex dump
+ static int oog = 0;									// OOG A STRING!!!
+-static char socket_domain_str[128]="";			// set if socket domain is specified
++static const char *socket_domain_str;			// set if socket domain is specified
+ static char field_sep = FS_WHITESPACE;			// field separator
+ static LineRange *field_range = NULL;			// stack of field ranges
+ static LineRange *line_range = NULL;			// stack of line ranges
+@@ -1027,7 +1027,7 @@
+ 
+ static int CreateConnectedSocket(const char *domain_port)
+ {
+-	char domain[128],*m;
++	char *domain, *m;
+ 	uint32 ipAddr;
+ 	int port;
+ 	int sock;
+@@ -1036,7 +1036,7 @@
+ 	struct hostent *ent;
+ 
+ 	// get domain-port information
+-	strcpy(domain,domain_port);
++	domain = strdup(domain_port);
+ 	for(m=domain;*m;m++) {
+ 		if (*m == ':') {
+ 			*m = 0;
+@@ -1044,6 +1044,7 @@
+ 			goto got_domain_port;
+ 		}
+ 	}
++	free(domain);
+ 	errno = EINVAL;
+ 	return -1;
+ 
+@@ -1055,10 +1056,12 @@
+ 	} else {
+ 		ent = gethostbyname(domain);
+ 		if (!ent) {
++			free(domain);
+ 			return -1;
+ 		}
+ 		ipAddr = ntohl(**((uint32**)ent->h_addr_list));
+ 	}
++	free(domain);
+ 
+ 	// create socket
+ 	sock = CreateSocket();
+@@ -1122,10 +1125,11 @@
+ 		fd = CreateConnectedSocket(path+6);
+ 		goto have_fd;
+ 	} else if (!strncmp(path,"http://",7)) {
+-		char hostport[128],*m;
++		char *hostport,*m;
+ 		const char *s;
+ 		
+ 		s = path+7;
++		hostport = malloc(strlen(s) + 4); // FIXME memory leak
+ 		for(m=hostport;s[0]!=':'&&s[0]!='/'&&s[0];) {
+ 			*m++ = *s++;
+ 		}
+@@ -1466,7 +1470,7 @@
+ 				break;
+ 
+ 			case OPT_SOCK:
+-				strcpy(socket_domain_str,optarg);
++				socket_domain_str = strdup(optarg);
+ 				break;
+ 
+ 			case OPT_BIND:
+@@ -1541,7 +1545,7 @@
+ 
+ 	// open the socket
+ 	sock = -1;
+-	if (socket_domain_str[0]) {
++	if (socket_domain_str) {
+ 		sock = CreateConnectedSocket(socket_domain_str);
+ 		if (sock == -1 && !sock_test) {
+ 			ErrorDuringRun(argv[0],socket_domain_str);

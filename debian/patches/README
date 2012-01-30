@@ -1,0 +1,13 @@
+Debian patches dog_1.7-9.diff
+
+Original list:
+
+    02_deifne.diff
+    03_64bit-fixes.diff
+    04_check-ctime.diff
+    05_manpage.diff
+    07_system_getopt.dpatch
+    08_manpage_-w.dpatch
+    09_long_filename_crash.dpatch
+
+All *.diff fiels were converted into *.patch

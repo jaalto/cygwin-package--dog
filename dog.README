@@ -1,0 +1,63 @@
+dog
+------------------------------------------
+
+Enhanced replacement for cat
+
+Program writes the contents of each given file, URL or standard input
+to standard output. It currently supports file, http and raw URLs. It
+is designed as a compatible, but enhanced replacement for cat.
+
+Runtime requirements:
+  cygwin
+
+Build requirements:
+  cygwin
+
+Canonical homepage:
+  <no upstream homepage available>
+  http://packages.debian.org/unstable/dog
+
+Canonical download:
+  See above
+
+Version control repository:
+
+Mailing list:
+
+Forum / Wiki:
+
+IRC channel:
+
+Upstream contact:
+  Maintainer: Jason Cohen <dogboy@photodex.com>
+  Bugs: Jason Cohen <dogboy@photodex.com>
+
+License:
+  GPL
+
+Language:
+  C
+
+------------------------------------------
+
+Build instructions:
+  unpack dog-*-src.tar.bz2
+    if you use setup to install this src package, it will be
+    unpacked under /usr/src automatically
+  cd /usr/src
+  ./dog*.sh all
+
+------------------------------------------
+
+Files included in the binary distribution:
+  See content of *.tar.gz
+
+------------------------------------------
+
+Port Notes:
+
+----- version 1.7-1 -----
+- Initial release 2008-02-27 Jari Aalto
+
+Cygwin port maintained by: Jari Aalto <jari.aalto@cante.net>
+Copyright (C) 2008 Jari Aalto; Licensed under GPL v2 or later

@@ -1,0 +1,6 @@
+sdesc: "Enhanced replacement for cat"
+ldesc: "Program writes the contents of each given file, URL or standard input
+to standard output. It currently supports file, http and raw URLs. It
+is designed as a compatible, but enhanced replacement for cat."
+category: Net
+requires: cygwin
